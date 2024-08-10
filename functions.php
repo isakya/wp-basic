@@ -6,3 +6,12 @@ function izumi_script_enqueue() {
 }
 
 add_action('wp_enqueue_scripts', 'izumi_script_enqueue');
+
+function izumi_theme_setup() {
+    add_theme_support('menus');
+
+    register_nav_menu('primary', 'Primary Header Navigation');
+    register_nav_menu('secondary', 'Footer Navigation');
+}
+
+add_action('init', 'izumi_theme_setup');
