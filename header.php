@@ -8,5 +8,14 @@
     <title>IZUMI</title>
     <?php wp_head(); ?>
 </head>
-<body>
+
+<?php
+    if(is_front_page()):
+        $izumi_classes = array('izumi_class', 'my-class');
+    else:
+        $izumi_classes = array('no-izumi-class');
+    endif;
+?>
+
+<body <?php body_class($izumi_classes); ?>>
 <?php wp_nav_menu(array('theme_location' => 'primary' )); ?>
