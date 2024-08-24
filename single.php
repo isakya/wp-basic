@@ -18,6 +18,14 @@ if (have_posts()):
 
             <hr>
 
+            <div class="col-xs-6 text-left">
+                <?php previous_post_link(); ?>
+            </div>
+            <div class="col-xs-6 text-right">
+                <?php next_post_link(); ?>
+            </div>
+
+
             <?php
             if(comments_open()){
                 comments_template();
@@ -28,8 +36,7 @@ if (have_posts()):
         </article>
 
     <?php endwhile;
-endif;
-?>
+endif; ?>
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
