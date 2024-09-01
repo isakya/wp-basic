@@ -12,7 +12,27 @@ if (have_posts()):
                 <div class="pull-right"><?php the_post_thumbnail('thumbnail'); ?></div>
             <?php endif; ?>
 
-            <small><?php the_category(' '); ?> || <?php the_tags(); ?> || <?php edit_post_link(); ?></small>
+            <small><?php
+                // 获取自定义分类
+                $terms_list = wp_get_post_terms(get_the_ID(), 'field');
+                $i = 0;
+                foreach ($terms_list as $term) {
+                    $i++;
+                    if($i > 1) {echo ', ';}
+                    echo $term->name;
+                }
+
+                ?> || <?php
+
+                $terms_list = wp_get_post_terms(get_the_ID(), 'software');
+                $i = 0;
+                foreach ($terms_list as $term) {
+                    $i++;
+                    if($i > 1) {echo ', ';}
+                    echo $term->name;
+                }
+
+                ?> || <?php edit_post_link(); ?></small>
 
             <?php the_content(); ?>
 
