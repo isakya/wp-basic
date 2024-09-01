@@ -12,27 +12,23 @@ if (have_posts()):
                 <div class="pull-right"><?php the_post_thumbnail('thumbnail'); ?></div>
             <?php endif; ?>
 
-            <small><?php
-                // 获取自定义分类
-                $terms_list = wp_get_post_terms(get_the_ID(), 'field');
-                $i = 0;
-                foreach ($terms_list as $term) {
-                    $i++;
-                    if($i > 1) {echo ', ';}
-                    echo $term->name;
-                }
+            <small>
+                <?php
+                    // 获取自定义分类
+                    echo izumi_get_terms(get_the_ID(),'field');
+                ?>
+                    ||
+                <?php
+                    echo izumi_get_terms(get_the_ID(),'software');
+                ?>
 
-                ?> || <?php
-
-                $terms_list = wp_get_post_terms(get_the_ID(), 'software');
-                $i = 0;
-                foreach ($terms_list as $term) {
-                    $i++;
-                    if($i > 1) {echo ', ';}
-                    echo $term->name;
-                }
-
-                ?> || <?php edit_post_link(); ?></small>
+                <?php
+                    // 判断当前用户权限
+                    if( current_user_can('manage_options') ) {
+                        echo '|| ';  edit_post_link();
+                    }
+                ?>
+            </small>
 
             <?php the_content(); ?>
 
